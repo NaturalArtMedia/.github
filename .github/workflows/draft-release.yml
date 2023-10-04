@@ -5,12 +5,15 @@ on:
     # Create a release entry whn a branch is pushed to main
     branches:
       - main
+
   pull_request:
     # Run the auto labeler when a PR has one of these events
     types:
       - opened
       - reopened
       - synchronize
+
+  workflow_call:
 
 permissions:
   contents: read
