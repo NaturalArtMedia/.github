@@ -1,0 +1,50 @@
+# Draft template configuration
+name-template: 'Release Notes $NEXT_MINOR_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+
+# don't mark this release a `latest` - we already have a WF that does that
+latest: false
+
+include-labels:
+  - 'change'
+  - 'feature'
+  - 'fix'
+  - 'hotfix'
+
+categories:
+  - title: '🧰 Changes'
+    labels:
+      - 'change'
+  - title: '🚀 Features'
+    labels:
+      - 'feature'
+  - title: '🐛 Fixes'
+    labels:
+      - 'fix'
+  - title: '🧨 Hot Fixes'
+    labels:
+      - 'hotfix'
+
+category-template: '### $TITLE'
+change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
+no-changes-template: '- No changes'
+template: |
+  ## Release Notes
+
+  $CHANGES
+
+# Auto labeler configuration
+# automatically create labels (for the above categories) based on titles and branch names
+autolabeler:
+  - label: 'change'
+    title:
+      - '/^change(\(.*\))*:/'
+  - label: 'feature'
+    title:
+      - '/^feat(\(.*\))*:/'
+  - label: 'fix'
+    title:
+      - '/^fix(\(.*\))*:/'
+  - label: 'hotfix'
+    title:
+      - '/^hotfix(\(.*\))*:/'
