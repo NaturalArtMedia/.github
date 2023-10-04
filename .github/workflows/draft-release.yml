@@ -1,0 +1,31 @@
+name: Draft Release
+
+on:
+  push:
+    # Create a release entry whn a branch is pushed to main
+    branches:
+      - main
+  pull_request:
+    # Run the auto labeler when a PR has one of these events
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+permissions:
+  contents: read
+
+jobs:
+  update_release_draft:
+    runs-on: ubuntu-latest
+    permissions:
+      # needs to create a github release
+      contents: write
+      # autolabeler needs to write to PR
+      pull-requests: write
+
+    steps:
+      # Drafts your next Release notes as Pull Requests are merged into "master"
+      - uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
